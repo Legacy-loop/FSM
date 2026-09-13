@@ -551,7 +551,7 @@
   <section class="layout">
     <!-- Painel Lateral: Máquina de Vendas -->
     <aside class="machine" aria-label="Máquina de bebidas">
-      <div class="brand">ENERGY DRINK FSM</div>
+      <div class="brand">DRINK FSM</div>
 
       <div class="machine-window">
         <div class="shelf">
@@ -597,24 +597,15 @@
       </div>
 
       <div class="fsm-scroll">
-        <svg viewBox="0 0 1200 660" role="img" aria-label="Diagrama FSM com layouts otimizados e sem cruzamentos">
+        <svg viewBox="0 0 1200 660" role="img" aria-label="Diagrama FSM com layouts otimizados e transição de 20 para 30 adicionada">
           <defs>
-            <!-- Seta elegante de transição -->
             <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4"
                     orient="auto" markerUnits="userSpaceOnUse">
               <path d="M0,1 L7,4 L0,7 Z" fill="#38BDF8"></path>
             </marker>
           </defs>
 
-          <!-- =========================================================
-               ESTRUTURA DE COLUNAS OTIMIZADA:
-               C1: 0 (x=120)
-               C2: 5 (x=360, y=220), 10 (x=360, y=440)
-               C3: 15 (x=640, y=120), 20 (x=640, y=330), 25 (x=640, y=540)
-               C4: Finais (x=980): 30(y=80), 35(y=190), 40(y=300), 45(y=410), 50(y=520)
-               ========================================================= -->
-
-          <!-- TRANSIÇÕES (CURVAS E SETAS REPETIDAS COM FOCO EM ESPAÇAMENTO) -->
+          <!-- ================= TRANSIÇÕES ================= -->
           
           <!-- C1 (0) -> C2 (5, 10) / C3 (25) -->
           <path class="edge" d="M155 315 C 210 240, 275 220, 320 220"></path> <!-- 0->5 -->
@@ -636,8 +627,9 @@
           <path class="edge" d="M670 145 C 720 250, 720 410, 670 515"></path> <!-- 15->25 -->
           <path class="edge" d="M675 110 C 770 100, 840 220, 935 285"></path> <!-- 15->40 -->
 
-          <!-- C3 (20) -> C3 (25), C4 (45) -->
+          <!-- C3 (20) -> C3 (25), C4 (30), C4 (45) -->
           <path class="edge" d="M630 365 C 610 415, 610 460, 630 505"></path> <!-- 20->25 -->
+          <path class="edge" d="M670 310 C 740 220, 830 110, 935 85"></path>  <!-- 20->30 (NOVA TRANSIÇÃO DE 10¢) -->
           <path class="edge" d="M675 340 C 760 350, 840 380, 935 400"></path> <!-- 20->45 -->
 
           <!-- C3 (25) -> C4 (30, 35, 50) -->
@@ -698,6 +690,10 @@
             <!-- 20 -> 25 -->
             <rect x="595" y="430" width="34" height="22"></rect>
             <text x="612" y="441">5</text>
+
+            <!-- 20 -> 30 (RÓTULO NOVO) -->
+            <rect x="765" y="200" width="38" height="22"></rect>
+            <text x="784" y="211">10</text>
 
             <!-- 20 -> 45 -->
             <rect x="800" y="355" width="38" height="22"></rect>
@@ -806,14 +802,15 @@
 
 <script>
   /*
-   * LÓGICA JAVASCRIPT PRESERVADA INTEGRALMENTE
+   * LÓGICA JAVASCRIPT
+   * Transição adicionada: 20 -> 10: 30
    */
   const transitions = {
     0:  {5:5, 10:10, 25:25},
     5:  {5:10, 10:15, 25:30},
     10: {5:15, 10:20, 25:35},
     15: {5:20, 10:25, 25:40},
-    20: {5:25, 25:45},
+    20: {5:25, 10:30, 25:45}, // <- Adicionado a opção da moeda de 10 centavos no saldo 20
     25: {5:30, 10:35, 25:50}
   };
 
